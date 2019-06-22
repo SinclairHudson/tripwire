@@ -119,7 +119,7 @@ class HomeScreen extends React.Component {
                 </Text>
                 <Switch/>
                 <Text>
-                    {JSON.stringify(this.state)}
+                    {JSON.stringify(this.props)}
                 </Text>
             </View>
         );

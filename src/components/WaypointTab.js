@@ -1,8 +1,11 @@
-import React from 'react';
-import {View, Text, Button, Switch, ScrollView, AsyncStorage, Alert} from 'react-native';
-import {Card, ListItem, Icon} from 'react-native-elements';
-import {createStackNavigator, createAppContainer} from 'react-navigation';
-import Iconi from 'react-native-vector-icons/Ionicons';
+import React from "react";
+import {View, Text, Button, ScrollView, AsyncStorage, Switch, PermissionsAndroid, Vibration, Alert} from "react-native";
+import {createStackNavigator, createAppContainer} from "react-navigation";
+import SettingsScreen from "./SettingsScreen";
+import { getDistance } from 'geolib';
+import SoundPlayer from 'react-native-sound-player';
+import EditScreen from './EditScreen';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import styles from './sytles';
 
@@ -50,10 +53,11 @@ class WaypointTab extends React.Component {
                     name="edit"
                     size={30}
                     style={{marginLeft: 'auto'}}
-                    onPress={() => this.props.navigation.navigate('Edit')}
+                    onPress={() => this.props.navigation.push('Edit', {
+                        id: this.state.id
+                    })}
                 />
-                { //<Text>{JSON.stringify(this.state)}</Text>
-                     }
+
             </View>
         );
 

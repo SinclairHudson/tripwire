@@ -31,7 +31,7 @@ class WaypointsScreen extends React.Component {
   renderWaypointTabs() {
     const list = [];
     for (var index in this.state) {
-      list.push(<WaypointTab id={this.state[index]} key={this.state[index]} />);
+      list.push(<WaypointTab id={this.state[index]} key={this.state[index]} navigation={this.props.navigation} />);
     }
     return list;
   }
@@ -53,7 +53,7 @@ class WaypointsScreen extends React.Component {
               name="ios-add-circle-outline"
               size={30}
               style={{ marginTop: '10%' }}
-              onPress={() => this.props.navigation.navigate('Add')}
+              onPress={() => this.props.navigation.navigate('Edit')}
             />
           </View>
         </ScrollView>

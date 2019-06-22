@@ -9,7 +9,7 @@
 // In App.js in a new project
 
 import React from 'react';
-import { View, Text, Button, ScrollView } from 'react-native';
+import { View, Text, Button, ScrollView, AppRegistry } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import SettingsScreen from './src/components/SettingsScreen';

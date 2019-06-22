@@ -31,6 +31,8 @@ class EditScreen extends React.Component {
     }
 
     render() {
+        const { navigation } = this.props;
+        const ID = navigation.getParam('id', 'NO-ID');
         return (
             <View style={{ flex: 1, alignItems: "stretch", justifyContent: "space-between"}}>
 
