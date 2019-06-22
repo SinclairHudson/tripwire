@@ -2,48 +2,48 @@ import React from "react";
 import {View, Text, Button, ScrollView, AsyncStorage, Switch, PermissionsAndroid, Vibration, Alert} from "react-native";
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
+import { getDistance } from 'geolib';
 
-function getDistance(waypoint, state){
-    let dy = Math.abs(waypoint.long - state.longitude);
-    let dx = Math.abs(waypoint.lat - state.latitude);
-    //converting from degrees to meters, roughly.
-    let yMeters = dy * 111111 * Math.cos(state.latitude);
-    let xMeters = dx * 111111;
-    return Math.sqrt(Math.pow(xMeters, 2) + Math.pow(yMeters,2));
-}
 class HomeScreen extends React.Component {
     constructor(props){
         super(props);
-        this.state = {};
         this.requestLocationPermission();
+        this.state = {
+            radius: 20,
+            enabled: true,
+            longitude: 0,
+            latitude: 0,
+        };
     }
-    async requestLocationPermission() {
+    async  requestLocationPermission(){
         try {
             const granted = await PermissionsAndroid.request(
                 PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
                 {
-                    'title': 'Location Permission',
-                    'message': 'This App needs access to your location ' +
-                        'so we can know where you are.'
+                    'title': 'Example App',
+                    'message': 'Example App access to your location '
                 }
-            );
+            )
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                console.log("You can use locations ")
+                console.log("You can use the location")
+                alert("You can use the location");
             } else {
-                console.log("Location permission denied")
+                console.log("location permission denied")
+                alert("Location permission denied");
             }
         } catch (err) {
             console.warn(err)
         }
     }
-    getDistance(waypoint, state){
-        let dy = Math.abs(waypoint.long - state.longitude);
-        let dx = Math.abs(waypoint.lat - state.latitude);
+    getDistance(waypoint){
+        let dy = Math.abs(waypoint.long - this.state.longitude);
+        let dx = Math.abs(waypoint.lat - this.state.latitude);
         //converting from degrees to meters, roughly.
-        let yMeters = dy * 111111 * Math.cos(state.latitude);
+        let yMeters = dy * 111111 * Math.cos(this.state.latitude);
         let xMeters = dx * 111111;
-        //Alert.alert("Distances", JSON.stringify(waypoint)+" "+JSON.stringify(state));
-        return Math.sqrt(Math.pow(xMeters, 2) + Math.pow(yMeters,2));
+        let dist = Math.sqrt(Math.pow(xMeters, 2) + Math.pow(yMeters,2));
+        Alert.alert("Distances", dist.toString());
+        return dist;
     }
     static navigationOptions = {
         title: 'Home',
@@ -55,16 +55,7 @@ class HomeScreen extends React.Component {
             fontWeight: 'bold',
         },
     };
-
     componentDidMount() {
-        AsyncStorage.setItem("Work",
-            JSON.stringify({
-                radius: 20,
-                enabled: true,
-                long: 45.2234,
-                lat: 43.234345,
-            })
-        );
         AsyncStorage.setItem("EngHack Work Space",
             JSON.stringify({
                 radius: 200,
@@ -93,8 +84,11 @@ class HomeScreen extends React.Component {
                 stores.map((result, i, store) => {
                     // get at each store's key/value so you can work with it
                     let key = store[i][0];
-                    let val = store[i][1];
-                    const distance = this.getDistance(JSON.parse(val), this.state);
+                    let val = JSON.parse(store[i][1]);
+                    const distance = getDistance(this.state, {
+                        longitude: val.long,
+                        latitude: val.lat,
+                    });
                     this.setState({dist: distance, way: key, val: val});
                     if(distance < store[i][1].radius){
                         Vibration.vibrate([1, 10000], false);
@@ -126,9 +120,6 @@ class HomeScreen extends React.Component {
                 <Text>
                     {JSON.stringify(this.state)}
                 </Text>
-                <Text>
-                </Text>
-                
             </View>
         );
     }
