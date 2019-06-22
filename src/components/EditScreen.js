@@ -30,6 +30,21 @@ class EditScreen extends React.Component {
         //AsyncStorage.getItem(ID, (object) =>{ this.setState(JSON.parse(object))})
     }
 
+    save() {
+        AsyncStorage.setItem(this.name,
+            JSON.stringify({
+                name: this.name,
+                radius: parseInt(this.radius),
+                enabled: true,
+                long: parseInt(this.long),
+                lat: parseInt(this.lat),
+                onTrip: "Vibrate",
+            })
+        );
+
+        this.props.navigation.navigate('Waypoints')
+    }
+
     render() {
         const { navigation } = this.props;
         const ID = navigation.getParam('id', 'NO-ID');
@@ -71,7 +86,7 @@ class EditScreen extends React.Component {
                 <View>
                     <Button
                         title="Save"
-                        onPress={() => this.props.navigation.navigate('Waypoints')}
+                        onPress={() => this.save()}
                     />
                     <Button color="#f91800"
                         title="Cancel"
