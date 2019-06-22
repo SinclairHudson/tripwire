@@ -4,6 +4,7 @@ import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
 import { getDistance } from 'geolib';
 import SoundPlayer from 'react-native-sound-player'
+var Sound = require('react-native-sound');
 
 class HomeScreen extends React.Component {
     constructor(props){
@@ -68,7 +69,7 @@ class HomeScreen extends React.Component {
                 enabled: true,
                 long: -80.54019206,
                 lat: 43.47270526,
-                onTrip: "Push",
+                onTrip: "Vibrate",
             })
         );
         this.watchId = navigator.geolocation.watchPosition(
@@ -96,7 +97,6 @@ class HomeScreen extends React.Component {
                         longitude: val.long,
                         latitude: val.lat,
                     });
-                    this.setState({dist: distance, way: key, val: val});
                     if(distance < val.radius){
                         switch(val.onTrip) {
                             case "Vibrate":
