@@ -11,6 +11,7 @@ class WaypointsScreen extends React.Component {
     super(props);
     this.state = {};
   }
+
   static navigationOptions = {
     title: 'Waypoints',
     headerStyle: {
