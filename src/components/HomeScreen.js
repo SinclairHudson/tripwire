@@ -33,16 +33,6 @@ class HomeScreen extends React.Component {
             console.warn(err)
         }
     }
-    getDistance(waypoint){
-        let dy = Math.abs(waypoint.long - this.state.longitude);
-        let dx = Math.abs(waypoint.lat - this.state.latitude);
-        //converting from degrees to meters, roughly.
-        let yMeters = dy * 111111 * Math.cos(this.state.latitude);
-        let xMeters = dx * 111111;
-        let dist = Math.sqrt(Math.pow(xMeters, 2) + Math.pow(yMeters,2));
-        Alert.alert("Distances", dist.toString());
-        return dist;
-    }
     static navigationOptions = {
         title: 'Home',
         headerStyle: {
@@ -54,24 +44,6 @@ class HomeScreen extends React.Component {
         },
     };
     componentDidMount() {
-        AsyncStorage.setItem("EngHack Work Space",
-            JSON.stringify({
-                radius: 50,
-                enabled: true,
-                long: -80.53984273,
-                lat: 43.4725835,
-                onTrip: "AliA",
-            })
-        );
-        AsyncStorage.setItem("Outside E5",
-            JSON.stringify({
-                radius: 20,
-                enabled: true,
-                long: -80.54019206,
-                lat: 43.47270526,
-                onTrip: "Vibrate",
-            })
-        );
         this.watchId = navigator.geolocation.watchPosition(
             (position) => {
                 this.setState(position.coords);
