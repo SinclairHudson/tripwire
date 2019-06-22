@@ -16,18 +16,7 @@ class WaypointTab extends React.Component {
   render() {
     const { id } = this.props;
 
-    return (
-      <ListItem title={id} rightIcon={{ name: 'edit' }} />
-      //     <Button
-      //       title="edit"
-      //       onPress={() => this.props.navigation.navigate('Edit')}
-      //     />
-      //     <Switch
-      //       onValueChange={this.toggleSwitch}
-      //       value={this.state.switchValue}
-      //     />
-      //   </ListItem>
-    );
+    return <ListItem title={id} rightIcon={{ name: 'edit' }} />;
   }
 }
 
