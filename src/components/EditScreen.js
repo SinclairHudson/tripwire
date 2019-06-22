@@ -25,8 +25,8 @@ class EditScreen extends React.Component {
         },
     };
     componentDidMount(){
-        const ID = navigation.getParam('id', 'NO-ID');
-        AsyncStorage.getItem(ID, (object) =>{ this.setState(JSON.parse(object))})
+        //const ID = navigation.getParam('id', 'NO-ID');
+        //AsyncStorage.getItem(ID, (object) =>{ this.setState(JSON.parse(object))})
     }
 
     render() {
