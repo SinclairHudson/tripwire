@@ -113,6 +113,10 @@ class HomeScreen extends React.Component {
                     title="Go to data"
                     onPress={() => this.props.navigation.navigate('Data')}
                 />
+                <Button
+                    title="Edit cheat screen"
+                    onPress={() => this.props.navigation.navigate('Edit')}
+                />
                 <Text>
                     Toggle all alerts:
                 </Text>
