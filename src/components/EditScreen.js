@@ -25,14 +25,19 @@ class EditScreen extends React.Component {
             fontWeight: 'bold',
         },
     };
-    componentDidMount(){
-        //const ID = navigation.getParam('id', 'NO-ID');
-        //AsyncStorage.getItem(ID, (object) =>{ this.setState(JSON.parse(object))})
+    async componentDidMount() {
+        try {
+            AsyncStorage.getItem(this.props.navigation.getParam('id', 'OOF')).then(
+                (item) => {
+                    this.setState(JSON.parse(item));
+                }
+            );
+        } catch (error) {
+            // Handle errors here
+        }
     }
 
     render() {
-        const { navigation } = this.props;
-        const ID = navigation.getParam('id', 'NO-ID');
         return (
             <View style={{ flex: 1, alignItems: "stretch", justifyContent: "space-between"}}>
 
@@ -67,7 +72,7 @@ class EditScreen extends React.Component {
                     onChangeText={(lat) => this.setState({lat})}
                     value={this.state.lat}/>
                 </View>
-
+                <Text>{JSON.stringify(this.props.navigation)}</Text>
                 <View>
                     <Button
                         title="Save"

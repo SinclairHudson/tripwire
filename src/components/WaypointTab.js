@@ -54,10 +54,9 @@ class WaypointTab extends React.Component {
                     size={30}
                     style={{marginLeft: 'auto'}}
                     onPress={() => this.props.navigation.push('Edit', {
-                        id: this.state.id
+                        id: this.props.id
                     })}
                 />
-
             </View>
         );
 
