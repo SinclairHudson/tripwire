@@ -9,8 +9,6 @@ class HomeScreen extends React.Component {
         super(props);
         this.requestLocationPermission();
         this.state = {
-            radius: 20,
-            enabled: true,
             longitude: 0,
             latitude: 0,
         };
@@ -66,7 +64,7 @@ class HomeScreen extends React.Component {
         );
         this.watchId = navigator.geolocation.watchPosition(
             (position) => {
-                this.setState(position);
+                this.setState(position.coords);
                 this.checkMatches();
             },
             (error) => this.setState({error: error.message}),
@@ -112,6 +110,10 @@ class HomeScreen extends React.Component {
                 <Button
                     title="Go to data"
                     onPress={() => this.props.navigation.navigate('Data')}
+                />
+                <Button
+                    title="Edit cheat screen"
+                    onPress={() => this.props.navigation.navigate('Edit')}
                 />
                 <Text>
                     Toggle all alerts:
