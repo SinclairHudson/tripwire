@@ -1,13 +1,12 @@
 import React from "react";
-import { View, Text, Button, ScrollView, AsyncStorage, TextInput } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import {View, Text, Button, ScrollView, AsyncStorage, TextInput} from "react-native";
+import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
 
 class EditScreen extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            name: "Temp",
             radius: -1,
             long: 90.0000,
             lat: 30.00000,
@@ -15,6 +14,7 @@ class EditScreen extends React.Component {
             onTrip: "Vibrate"
         }
     }
+
     static navigationOptions = {
         title: 'Edit Waypoint',
         headerStyle: {
@@ -25,62 +25,59 @@ class EditScreen extends React.Component {
             fontWeight: 'bold',
         },
     };
-    async componentDidMount() {
-        try {
-            AsyncStorage.getItem(this.props.navigation.getParam('id', 'OOF')).then(
-                (item) => {
-                    this.setState(JSON.parse(item));
-                }
-            );
-        } catch (error) {
-            // Handle errors here
-        }
+
+    componentDidMount() {
+        AsyncStorage.getItem(this.props.navigation.state.params.id).then(
+            (item) => {
+                this.setState(JSON.parse(item));
+            }
+        );
     }
 
     render() {
         return (
-            <View style={{ flex: 1, alignItems: "stretch", justifyContent: "space-between"}}>
+            <View style={{flex: 1, alignItems: "stretch", justifyContent: "space-between"}}>
 
                 <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
-                    <Text style={{textAlign:"center"}}> Waypoint Name </Text>
+                    <Text style={{textAlign: "center"}}> Waypoint Name </Text>
                     <TextInput
-                        style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign:"center"}}
+                        style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
                         onChangeText={(name) => this.setState({name})}
-                        value={this.state.name}/>
-                    </View>
-
-                <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
-                    <Text style={{textAlign:"center"}}> Waypoint Radius </Text>
-                    <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign:"center"}}
-                    onChangeText={(radius) => this.setState({radius})}
-                    value={this.state.radius}/>
+                        value={this.props.navigation.state.params.id}/>
                 </View>
 
                 <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
-                    <Text style={{textAlign:"center"}}> Waypoint Longitude </Text>
+                    <Text style={{textAlign: "center"}}> Waypoint Radius </Text>
                     <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign:"center"}}
-                    onChangeText={(long) => this.setState({long})}
-                    value={this.state.long}/>
+                        style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
+                        onChangeText={(radius) => this.setState({radius})}
+                        value={String(this.state.radius)}/>
                 </View>
 
                 <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
-                    <Text style={{textAlign:"center"}}> Waypoint Latitude </Text>
+                    <Text style={{textAlign: "center"}}> Waypoint Longitude </Text>
                     <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign:"center"}}
-                    onChangeText={(lat) => this.setState({lat})}
-                    value={this.state.lat}/>
+                        style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
+                        onChangeText={(long) => this.setState({long})}
+                        value={String(this.state.long)}/>
                 </View>
-                <Text>{JSON.stringify(this.props.navigation)}</Text>
+
+                <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
+                    <Text style={{textAlign: "center"}}> Waypoint Latitude </Text>
+                    <TextInput
+                        style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
+                        onChangeText={(lat) => this.setState({lat})}
+                        value={String(this.state.lat)}/>
+                </View>
+                <Text>{JSON.stringify(this.state)}</Text>
                 <View>
                     <Button
                         title="Save"
                         onPress={() => this.props.navigation.navigate('Waypoints')}
                     />
                     <Button color="#f91800"
-                        title="Cancel"
-                        onPress={() => this.props.navigation.navigate('Waypoints')}
+                            title="Cancel"
+                            onPress={() => this.props.navigation.navigate('Waypoints')}
                     />
                 </View>
             </View>
