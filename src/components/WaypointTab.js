@@ -5,6 +5,7 @@ import {createStackNavigator, createAppContainer} from 'react-navigation';
 import Iconi from 'react-native-vector-icons/Ionicons';
 
 import styles from './sytles';
+import WaypointsScreen from "./WaypointsScreen";
 
 class WaypointTab extends React.Component {
     constructor(props) {
@@ -50,7 +51,7 @@ class WaypointTab extends React.Component {
                     name="edit"
                     size={30}
                     style={{marginLeft: 'auto'}}
-                    onPress={() => this.props.navigation.navigate('Edit')}
+                    onPress={() => this.props.navigation.navigate("Edit", {id: this.props.id})}
                 />
                 { //<Text>{JSON.stringify(this.state)}</Text>
                      }
