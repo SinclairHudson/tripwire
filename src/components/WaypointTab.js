@@ -1,22 +1,34 @@
-import React from "react";
-import { View, Text, Button, ScrollView } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import React from 'react';
+import { View, Text, Button, Switch, ScrollView } from 'react-native';
+import { ListItem, Icon } from 'react-native-elements';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import styles from './sytles';
 
 class WaypointTab extends React.Component {
-    constructor(props){
-        super(props);
-    }
-    render() {
-        return (
-            <View>
-                <Text>{this.props.id}</Text>
-                <Button
-                    title="edit"
-                    onPress={() => this.props.navigation.navigate('Edit')}
-                />
-            </View>
-        );
-    }
+  constructor(props) {
+    super(props);
+    this.state = { switchValue: false };
+  }
+
+  toggleSwitch = value => {
+    this.setState({ switchValue: value });
+  };
+  render() {
+    const { id } = this.props;
+
+    return (
+      <ListItem title={id} rightIcon={{ name: 'edit' }} />
+      //     <Button
+      //       title="edit"
+      //       onPress={() => this.props.navigation.navigate('Edit')}
+      //     />
+      //     <Switch
+      //       onValueChange={this.toggleSwitch}
+      //       value={this.state.switchValue}
+      //     />
+      //   </ListItem>
+    );
+  }
 }
 
 export default WaypointTab;
