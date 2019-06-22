@@ -3,6 +3,8 @@ import {View, Text, Button, ScrollView, AsyncStorage, Switch, PermissionsAndroid
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
 import { getDistance } from 'geolib';
+import SoundPlayer from 'react-native-sound-player'
+var Sound = require('react-native-sound');
 
 class HomeScreen extends React.Component {
     constructor(props){
@@ -24,10 +26,8 @@ class HomeScreen extends React.Component {
             )
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
                 console.log("You can use the location")
-                alert("You can use the location");
             } else {
                 console.log("location permission denied")
-                alert("Location permission denied");
             }
         } catch (err) {
             console.warn(err)
@@ -56,10 +56,20 @@ class HomeScreen extends React.Component {
     componentDidMount() {
         AsyncStorage.setItem("EngHack Work Space",
             JSON.stringify({
-                radius: 200,
+                radius: 50,
                 enabled: true,
                 long: -80.53984273,
                 lat: 43.4725835,
+                onTrip: "AliA",
+            })
+        );
+        AsyncStorage.setItem("Outside E5",
+            JSON.stringify({
+                radius: 20,
+                enabled: true,
+                long: -80.54019206,
+                lat: 43.47270526,
+                onTrip: "Vibrate",
             })
         );
         this.watchId = navigator.geolocation.watchPosition(
@@ -87,9 +97,27 @@ class HomeScreen extends React.Component {
                         longitude: val.long,
                         latitude: val.lat,
                     });
-                    this.setState({dist: distance, way: key, val: val});
-                    if(distance < store[i][1].radius){
-                        Vibration.vibrate([1, 10000], false);
+                    if(distance < val.radius){
+                        switch(val.onTrip) {
+                            case "Vibrate":
+                                Vibration.vibrate([1, 5000, 1000, 5000, 1000, 5000], false);
+                                break;
+                            case "Push":
+                                // code block
+                                break;
+                            case "AliA":
+                                try {
+                                    SoundPlayer.playSoundFile('a', 'mp3')
+                                } catch (e) {
+                                    console.log(`cannot play the sound file`, e)
+                                }
+                                break;
+                            case "Alert":
+                                Alert.alert("ALERT!", "you're close to "+ key + ".");
+                                break;
+                            default:
+                                Alert.alert("ALERT!", "you're close to "+ key + ".");
+                        }
                     }
                 });
             });
