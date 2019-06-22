@@ -12,7 +12,7 @@ class WaypointTab extends React.Component {
                 <Text>{this.props.id}</Text>
                 <Button
                     title="edit"
-                    onPress={() => this.props.navigation.navigate('Edit')}
+                    onPress={() => this.props.navigation.navigate('Edit', {id: this.props.id})}
                 />
             </View>
         );
