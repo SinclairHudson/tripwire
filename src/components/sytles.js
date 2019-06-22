@@ -1,6 +1,18 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 3,
+    padding: 5,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#d6d7da',
+
+    borderRadius: 3
+  },
   icon: {
     margin: 6,
     flex: 1,
@@ -66,9 +78,9 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
     backgroundColor: 'transparent',
-    fontSize: 22,
+    fontSize: 18,
     fontFamily: 'AvenirNext-DemiBold',
-    textAlign: 'center'
+    marginLeft: 10
   },
   valueContainer: {
     flexDirection: 'row',
