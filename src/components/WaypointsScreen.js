@@ -1,8 +1,13 @@
 import React from "react";
-import { View, Text, Button, ScrollView } from "react-native";
+import { View, Text, Button, ScrollView, AsyncStorage } from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
+import WaypointTab from "./WaypointTab";
 
 class WaypointsScreen extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {};
+    }
     static navigationOptions = {
         title: 'Waypoints',
         headerStyle: {
@@ -13,8 +18,27 @@ class WaypointsScreen extends React.Component {
             fontWeight: 'bold',
         },
     };
-    renderWaypointTabs(){
+    componentDidMount() {
+        this.forceUpdate();
+        AsyncStorage.getAllKeys((err, keys) => {
+            this.setState(keys);
+        });
+    }
 
+    renderWaypointTabs(){
+        /*
+            const list = this.state.waypoints.map((product) => (
+                <WaypointTab
+                    id={product.id}
+                />
+            ));
+        return list;
+        */
+        const list = [];
+        for (var index in this.state) {
+            list.push(<WaypointTab id={this.state[index]}/>);
+        }
+         return list;
     }
     render() {
         return (

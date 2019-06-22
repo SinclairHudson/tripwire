@@ -15,13 +15,18 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import SettingsScreen from "./src/components/SettingsScreen";
 import HomeScreen from "./src/components/HomeScreen";
 import WaypointsScreen from "./src/components/WaypointsScreen";
+import EditScreen from "./src/components/EditScreen";
+import DataScreen from "./src/components/DataScreen";
 
 
 const AppNavigator = createStackNavigator(
     {
         Home: HomeScreen,
         Details: WaypointsScreen,
-        Settings: SettingsScreen
+        Settings: SettingsScreen,
+        Edit: EditScreen,
+        Waypoints: WaypointsScreen,
+        Data: DataScreen,
     },
     {
         initialRouteName: "Home"
