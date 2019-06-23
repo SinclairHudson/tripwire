@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   switch:{
-    flex: 2,
+    alignSelf: 'flex-end'
   },
   editor:{
     flex: 1,
