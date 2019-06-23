@@ -17,7 +17,7 @@ class WaypointsScreen extends React.Component {
   static navigationOptions = {
     title: 'Waypoints',
     headerStyle: {
-      backgroundColor: '#f4511e'
+      backgroundColor: '#58CC2A'
     },
     headerTintColor: '#fff',
     headerTitleStyle: {

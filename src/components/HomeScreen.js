@@ -108,7 +108,7 @@ class HomeScreen extends React.Component {
                             source={require('./TripwireThumbnail.png')}
                         />
                     </View>
-                    <Button color="#58EE2A" style={{margin: 30, borderRadius: 20}}
+                    <Button color="#58CC2A" style={{margin: 30, borderRadius: 20}}
                         title="Waypoints"
                         onPress={() => this.props.navigation.navigate('Waypoints')}
                     >
@@ -118,11 +118,11 @@ class HomeScreen extends React.Component {
                         <Text style={{flex: 4,
                             fontSize: 15,
                             color: 'rgb(255,255,255)'}}>
-                            Toggle off alerts:
+                            Toggle all alerts:
                         </Text>
                         <Switch
                             name="ios-add-circle-outline"
-                            size={40}
+                            size={60}
                             onValueChange={this.toggleSwitch}
                             value={this.state.global}
                         />

@@ -32,7 +32,7 @@ class EditScreen extends React.Component {
     static navigationOptions = {
         title: 'Edit Waypoint',
         headerStyle: {
-            backgroundColor: '#f4511e',
+            backgroundColor: '#58CC2A',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -41,21 +41,21 @@ class EditScreen extends React.Component {
     };
 
     componentDidMount() {
-            AsyncStorage.getItem(this.props.navigation.state.params.id).then(
-                (item) => {
-                    let temp = JSON.parse(item);
-                    let s = {
-                        name: temp.name,
-                        radius: String(temp.radius),
-                        long: String(temp.long),
-                        lat: String(temp.lat),
-                        enabled: temp.enabled,
-                        onTrip: temp.onTrip,
+        AsyncStorage.getItem(this.props.navigation.state.params.id).then(
+            (item) => {
+                let temp = JSON.parse(item);
+                let s = {
+                    name: temp.name,
+                    radius: String(temp.radius),
+                    long: String(temp.long),
+                    lat: String(temp.lat),
+                    enabled: temp.enabled,
+                    onTrip: temp.onTrip,
 
-                    };
-                    this.setState(s);
-                }
-            );
+                };
+                this.setState(s);
+            }
+        );
     }
 
     async save() {
@@ -82,46 +82,66 @@ class EditScreen extends React.Component {
 
     render() {
         return (
-            <View style={{flex: 1, alignItems: "stretch", justifyContent: "space-between"}}>
+            <View style={styles.backdrop}>
                 <ScrollView>
+                    <View style={styles.global}>
+                        <Text style={{
+                            flex: 4,
+                            fontSize: 15,
+                            color: 'rgb(255,255,255)'
+                        }}>
+                            Toggle this alert:
+                        </Text>
+                        <Switch
+                            name="ios-add-circle-outline"
+                            size={50}
+                            style={styles.switch}
+                            onValueChange={() => {
+                                this.setState({enabled: !this.state.enabled});
+                            }}
+                            value={this.state.enabled}
+                        />
+                    </View>
                     <View style={styles.editor}>
-                        <Text style={{textAlign: "center"}}> Waypoint Name </Text>
+                        <Text style={styles.header}> Waypoint Name </Text>
                         <TextInput
                             onChangeText={name => this.setState({name: name})}
-                            style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
+                            style={styles.input}
                             value={this.state.name}/>
                     </View>
 
                     <View style={styles.editor}>
-                        <Text style={{textAlign: "center"}}> Waypoint Radius</Text>
+                        <Text style={styles.header}> Waypoint Radius</Text>
                         <TextInput
-                            style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
+                            style={styles.input}
                             onChangeText={rad => this.setState({radius: rad})}
                             value={this.state.radius}/>
                     </View>
 
                     <View style={styles.editor}>
-                        <Text style={{textAlign: "center"}}> Waypoint Longitude </Text>
+                        <Text style={styles.header}> Waypoint Longitude </Text>
                         <TextInput
-                            style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
+                            style={styles.input}
                             onChangeText={long => this.setState({long: long})}
                             value={this.state.long}/>
                     </View>
 
                     <View style={styles.editor}>
-                        <Text style={{textAlign: "center"}}> Waypoint Latitude </Text>
+                        <Text style={styles.header}> Waypoint Latitude </Text>
                         <TextInput
-                            style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
+                            style={styles.input}
                             onChangeText={lat => this.setState({lat: lat})}
                             value={this.state.lat}/>
                     </View>
                     <Button
-                        title="Save Current Location"
+                        title="Use Current Location"
+                        color='#228822'
                         onPress={() => this.setCurrentLocation()}
                     />
 
                     <View style={styles.editor}>
                         <Picker
+                            style={{color: 'white', backgroundColor: '#333333', textAlign: 'center'}}
                             selectedValue={this.state.onTrip}
                             onValueChange={(itemValue, itemIndex) =>
                                 this.setState({onTrip: itemValue})}>
@@ -131,33 +151,29 @@ class EditScreen extends React.Component {
                         </Picker>
                     </View>
 
-                    <Switch
-                        name="ios-add-circle-outline"
-                        size={30}
-                        style={styles.switch}
-                        onValueChange={()=>{
-                            this.setState({enabled: !this.state.enabled});
-                        }}
-                        value={this.state.enabled}
-                    />
-
                     <View>
-                        <Button
-                            title="Save"
-                            onPress={() => this.save()}
-                        />
+                        <View style={styles.save}>
+                            <Button
+                                color='#58CC2A'
+                                title="Save"
+                                onPress={() => this.save()}
+                            />
+                        </View>
 
-                        <Button
-                            color="#f91800"
-                            title="Delete"
-                            onPress={() => this.delete()}
-                        />
-
-                        <Button
-                            color="#333333"
-                            title="Cancel"
-                            onPress={() => this.props.navigation.replace('Waypoints')}
-                        />
+                        <View style={styles.save}>
+                            <Button
+                                color="#228822"
+                                title="Delete"
+                                onPress={() => this.delete()}
+                            />
+                        </View>
+                        <View style={styles.save}>
+                            <Button
+                                color="#333333"
+                                title="Cancel"
+                                onPress={() => this.props.navigation.replace('Waypoints')}
+                            />
+                        </View>
                     </View>
                 </ScrollView>
             </View>

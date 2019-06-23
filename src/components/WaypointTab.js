@@ -30,7 +30,7 @@ class WaypointTab extends React.Component {
 
     render() {
         return (
-            <View style={[styles.tab, this.state.enabled? {backgroundColor: 'green'}: {backgroundColor: 'black'}]}>
+            <View style={[styles.tab, this.state.enabled? {backgroundColor: '#58CC2A'}: {backgroundColor: 'black'}]}>
                 <Text style={styles.buttonText}
                       onPress={() => this.props.navigation.push('Edit', {
                           id: this.props.id
