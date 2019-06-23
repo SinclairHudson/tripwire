@@ -42,21 +42,17 @@ class WaypointTab extends React.Component {
         const {id} = this.props;
         return (
             <View style={styles.tab}>
-                <Text style={styles.buttonText}>{id}</Text>
+                <Text style={styles.buttonText}
+                      onPress={() => this.props.navigation.push('Edit', {
+                          id: this.props.id
+                      })}>
+                    {id}</Text>
                 <Switch
                     name="ios-add-circle-outline"
                     size={30}
                     style={styles.switch}
                     onValueChange={this.toggleSwitch}
                     value={this.state.enabled}
-                />
-                <Icon
-                    name="edit"
-                    size={30}
-                    style={styles.icon}
-                    onPress={() => this.props.navigation.push('Edit', {
-                        id: this.props.id
-                    })}
                 />
             </View>
         );

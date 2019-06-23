@@ -117,7 +117,7 @@ class HomeScreen extends React.Component {
                     >
                         <Text style={styles.buttonText}>Waypoints</Text>
                     </TouchableOpacity>
-                    <View>
+                    <View style={styles.global}>
                         <Text style={styles.buttonText}>
                             Toggle all alerts:
                         </Text>

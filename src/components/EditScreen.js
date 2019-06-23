@@ -60,10 +60,10 @@ class EditScreen extends React.Component {
         AsyncStorage.setItem(this.state.name,
             JSON.stringify({
                 name: this.state.name,
-                radius: parseInt(this.state.radius),
+                radius: this.state.radius,
                 enabled: true,
-                long: parseInt(this.state.long),
-                lat: parseInt(this.state.lat),
+                long: this.state.long,
+                lat: this.state.lat,
                 onTrip: this.state.onTrip,
             })
         );
@@ -87,7 +87,7 @@ class EditScreen extends React.Component {
                         <Text style={{textAlign: "center"}}> Waypoint Name </Text>
                         <TextInput
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                            onChangeText={(name) => this.setState({name})}
+                            onChangeText={(name) => this.setState({name: name})}
                             value={this.state.name}/>
                     </View>
 
@@ -95,7 +95,7 @@ class EditScreen extends React.Component {
                         <Text style={{textAlign: "center"}}> Waypoint Radius </Text>
                         <TextInput
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                            onChangeText={(radius) => this.setState({radius})}
+                            onChangeText={(radius) => this.setState({radius: parseFloat(radius)})}
                             value={String(this.state.radius)}/>
                     </View>
 
@@ -103,7 +103,7 @@ class EditScreen extends React.Component {
                         <Text style={{textAlign: "center"}}> Waypoint Longitude </Text>
                         <TextInput
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                            onChangeText={(long) => this.setState({long})}
+                            onChangeText={(long) => this.setState({long: parseFloat(long)})}
                             value={String(this.state.long)}/>
                     </View>
 
@@ -111,7 +111,7 @@ class EditScreen extends React.Component {
                         <Text style={{textAlign: "center"}}> Waypoint Latitude </Text>
                         <TextInput
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                            onChangeText={(lat) => this.setState({lat})}
+                            onChangeText={(lat) => this.setState({lat: parseFloat(lat)})}
                             value={String(this.state.lat)}/>
                     </View>
 

@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "stretch",
     justifyContent: "center",
-    margin: 30,
+    margin: 10,
   },
   tab: {
     flex: 1,
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'space-around',
     alignContent: 'center'
   },
@@ -63,19 +64,14 @@ const styles = StyleSheet.create({
     height: undefined,
     marginLeft: 20
   },
-  grad: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    color: 'rgba(255,255,255,1)'
+  global:{
+    flexDirection: 'row',
+    padding: 30,
   },
   button: {
     margin: 30,
     flex: 1,
     width: 300,
-    alignContent: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'rgb(255,13,3)',
     borderRadius: 20
   },
