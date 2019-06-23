@@ -7,7 +7,7 @@ import SoundPlayer from 'react-native-sound-player';
 import EditScreen from './EditScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import styles from './sytles';
+import styles from './styles';
 import WaypointsScreen from "./WaypointsScreen";
 
 class WaypointTab extends React.Component {

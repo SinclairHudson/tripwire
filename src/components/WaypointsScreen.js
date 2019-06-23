@@ -3,7 +3,7 @@ import { View, ScrollView, AsyncStorage, Text } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { Card, ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
-import styles from './sytles';
+import styles from './styles';
 
 import WaypointTab from './WaypointTab';
 

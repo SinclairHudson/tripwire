@@ -2,7 +2,7 @@ import React from "react";
 import {View, Text, Button, ScrollView, AsyncStorage, TextInput, Picker} from "react-native";
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
-import styles from './sytles';
+import styles from './styles';
 
 class EditScreen extends React.Component {
     constructor(props) {

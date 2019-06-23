@@ -4,7 +4,7 @@ import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
 import {getDistance} from 'geolib';
 import SoundPlayer from 'react-native-sound-player'
-import styles from './sytles';
+import styles from './styles';
 
 class HomeScreen extends React.Component {
     constructor(props) {
