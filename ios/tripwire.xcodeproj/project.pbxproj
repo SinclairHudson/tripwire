@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -44,8 +45,8 @@
 		5F1296EEB5E24EE7A5EDF6B0 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F93A0DC2A22245E29DB9DFA0 /* Zocial.ttf */; };
 		605C35635D144B58916ED831 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6448E9C945724E26A214B628 /* libRNVectorIcons.a */; };
 		616515F7BF6B4EFF97CC47DE /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10427CD7AEEF4F98A0E838D9 /* FontAwesome5_Solid.ttf */; };
-		6582CA8B22BED3B600AE3ABD /* a.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6582CA8A22BED3B600AE3ABD /* a.mp3 */; };
-		6582CA8C22BED3B600AE3ABD /* a.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6582CA8A22BED3B600AE3ABD /* a.mp3 */; };
+		6582CBAD22BF14B100AE3ABD /* a.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6582CBAC22BF14B100AE3ABD /* a.mp3 */; };
+		6582CBAE22BF14B100AE3ABD /* a.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6582CBAC22BF14B100AE3ABD /* a.mp3 */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8D17DDB1429740BEAC350AA5 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 693F83E97A094DE88BDEB2D3 /* FontAwesome.ttf */; };
 		955066F85F53465B8B471F1E /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B76AA09C845405981E957A0 /* MaterialIcons.ttf */; };
@@ -416,7 +417,7 @@
 		3736F879D69F4EF5B9995CB5 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		6448E9C945724E26A214B628 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
-		6582CA8A22BED3B600AE3ABD /* a.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = a.mp3; path = ../android/app/src/main/res/raw/a.mp3; sourceTree = "<group>"; };
+		6582CBAC22BF14B100AE3ABD /* a.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = a.mp3; path = ../android/app/src/main/res/raw/a.mp3; sourceTree = "<group>"; };
 		675B52A8788244D8B706AC41 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		693F83E97A094DE88BDEB2D3 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		71F74E22F1274F05A25E4937 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -588,9 +589,9 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				6582CBAC22BF14B100AE3ABD /* a.mp3 */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				6582CA8A22BED3B600AE3ABD /* a.mp3 */,
 			);
 			name = tripwire;
 			sourceTree = "<group>";
@@ -1283,7 +1284,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6582CA8C22BED3B600AE3ABD /* a.mp3 in Resources */,
+				6582CBAE22BF14B100AE3ABD /* a.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1291,7 +1292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6582CA8B22BED3B600AE3ABD /* a.mp3 in Resources */,
+				6582CBAD22BF14B100AE3ABD /* a.mp3 in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				C4CDE8D3E4054155BA9B2B44 /* AntDesign.ttf in Resources */,
