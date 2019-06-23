@@ -16,15 +16,14 @@ class EditScreen extends React.Component {
     }
 
     setCurrentLocation(){
-
-        this.setState();
-
-        const temp = navigator.geolocation.getCurrentPosition(
+        navigator.geolocation.getCurrentPosition(
             (position) => {
-                this.setState(position.coords);
+                this.setState({
+                    long: position.coords.longitude,
+                    lat: position.coords.latitude
+                });
             }
         );
-        Alert.alert("..", temp)
     }
 
     static navigationOptions = {
@@ -62,12 +61,6 @@ class EditScreen extends React.Component {
     }
 
     render() {
-        const temp = navigator.geolocation.getCurrentPosition(
-            (position) => {
-                this.setState(position.coords);
-                this.checkMatches();
-            }
-        );
         return (
             <View style={{flex: 1, alignItems: "stretch", justifyContent: "space-between"}}>
 
@@ -102,12 +95,15 @@ class EditScreen extends React.Component {
                         onChangeText={(lat) => this.setState({lat})}
                         value={String(this.state.lat)}/>
                 </View>
-                <Text>{JSON.stringify(this.state)}</Text>
-                {/*<Text>{JSON.stringify(temp)}</Text>*/}
+                {/*<Text>{JSON.stringify(this.state)}</Text>*/}
                 <View>
                     <Button
                         title="Save"
                         onPress={() => this.save()}
+                    />
+                    <Button
+                        title="Save Current Location"
+                        onPress={() => this.setCurrentLocation()}
                     />
                     <Button color="#f91800"
                             title="Cancel"
