@@ -77,7 +77,7 @@ class HomeScreen extends React.Component {
                                     break;
                                 case "Alarm":
                                     try {
-                                        SoundPlayer.playSoundFile('a', 'mp3')
+                                        SoundPlayer.playSoundFile('b', 'mp3')
                                     } catch (e) {
                                         console.log(`cannot play the sound file`, e)
                                     }
