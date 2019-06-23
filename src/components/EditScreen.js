@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, Button, ScrollView, AsyncStorage, TextInput} from "react-native";
+import {View, Text, Button, ScrollView, AsyncStorage, TextInput, Picker} from "react-native";
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
 
@@ -44,7 +44,7 @@ class EditScreen extends React.Component {
                 enabled: true,
                 long: parseInt(this.state.long),
                 lat: parseInt(this.state.lat),
-                onTrip: "Vibrate",
+                onTrip: this.state.onTrip,
             })
         );
 
@@ -86,7 +86,21 @@ class EditScreen extends React.Component {
                         onChangeText={(lat) => this.setState({lat})}
                         value={String(this.state.lat)}/>
                 </View>
+
+                <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
+                        <Picker
+                            selectedValue = {this.state.onTrip}
+                            onValueChange = {(itemValue, itemIndex) =>
+                                this.setState({onTrip: itemValue})}>
+                            <Picker.Item label="Vibrate" value="Vibrate"/>
+                            <Picker.Item label="Push" value="Push"/>
+                            <Picker.Item label="Alert" value="Alert"/>
+                            <Picker.Item label="???" value="AliA"/>
+                        </Picker>
+                </View>
+
                 <Text>{JSON.stringify(this.state)}</Text>
+
                 <View>
                     <Button
                         title="Save"
@@ -94,7 +108,7 @@ class EditScreen extends React.Component {
                     />
                     <Button color="#f91800"
                             title="Cancel"
-                            onPress={() => this.props.navigation.navigate('Waypoints')}
+                            onPress={() => this.props.navigation.goBack()}
                     />
                 </View>
             </View>
