@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, Button, ScrollView, AsyncStorage, TextInput, Alert} from "react-native";
+import {View, Text, Button, ScrollView, AsyncStorage, TextInput, Picker} from "react-native";
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
 
@@ -7,10 +7,11 @@ class EditScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            radius: -1,
-            long: 90.0000,
-            lat: 30.00000,
-            enabled: false,
+            name: this.props.navigation.state.params.id,
+            radius: 0,
+            long: 0,
+            lat: 0,
+            enabled: true,
             onTrip: "Vibrate"
         }
     }
@@ -46,18 +47,19 @@ class EditScreen extends React.Component {
     }
 
     save() {
-        AsyncStorage.setItem(this.name,
+        AsyncStorage.removeItem(this.props.navigation.state.params.id);
+        AsyncStorage.setItem(this.state.name,
             JSON.stringify({
-                name: this.name,
-                radius: parseInt(this.radius),
+                name: this.state.name,
+                radius: parseInt(this.state.radius),
                 enabled: true,
-                long: parseInt(this.long),
-                lat: parseInt(this.lat),
-                onTrip: "Vibrate",
+                long: parseInt(this.state.long),
+                lat: parseInt(this.state.lat),
+                onTrip: this.state.onTrip,
             })
         );
 
-        this.props.navigation.navigate('Waypoints')
+        this.props.navigation.goBack();
     }
 
     render() {
@@ -69,7 +71,7 @@ class EditScreen extends React.Component {
                     <TextInput
                         style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
                         onChangeText={(name) => this.setState({name})}
-                        value={this.props.navigation.state.params.id}/>
+                        value={this.state.name}/>
                 </View>
 
                 <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
@@ -95,7 +97,21 @@ class EditScreen extends React.Component {
                         onChangeText={(lat) => this.setState({lat})}
                         value={String(this.state.lat)}/>
                 </View>
-                {/*<Text>{JSON.stringify(this.state)}</Text>*/}
+
+                <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
+                        <Picker
+                            selectedValue = {this.state.onTrip}
+                            onValueChange = {(itemValue, itemIndex) =>
+                                this.setState({onTrip: itemValue})}>
+                            <Picker.Item label="Vibrate" value="Vibrate"/>
+                            <Picker.Item label="Push" value="Push"/>
+                            <Picker.Item label="Alert" value="Alert"/>
+                            <Picker.Item label="???" value="AliA"/>
+                        </Picker>
+                </View>
+
+                <Text>{JSON.stringify(this.state)}</Text>
+
                 <View>
                     <Button
                         title="Save"
@@ -107,7 +123,7 @@ class EditScreen extends React.Component {
                     />
                     <Button color="#f91800"
                             title="Cancel"
-                            onPress={() => this.props.navigation.navigate('Waypoints')}
+                            onPress={() => this.props.navigation.goBack()}
                     />
                 </View>
             </View>
