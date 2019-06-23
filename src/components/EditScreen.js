@@ -110,7 +110,6 @@ class EditScreen extends React.Component {
                             onValueChange = {(itemValue, itemIndex) =>
                                 this.setState({onTrip: itemValue})}>
                             <Picker.Item label="Vibrate" value="Vibrate"/>
-                            /*<Picker.Item label="Push" value="Push"/>*/
                             <Picker.Item label="Alert" value="Alert"/>
                             <Picker.Item label="Alarm" value="Alarm"/>
                         </Picker>
