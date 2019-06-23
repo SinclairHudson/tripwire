@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, Button, ScrollView, AsyncStorage, TextInput} from "react-native";
+import {View, Text, Button, ScrollView, AsyncStorage, TextInput, Alert} from "react-native";
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
 
@@ -13,6 +13,18 @@ class EditScreen extends React.Component {
             enabled: false,
             onTrip: "Vibrate"
         }
+    }
+
+    setCurrentLocation(){
+
+        this.setState();
+
+        const temp = navigator.geolocation.getCurrentPosition(
+            (position) => {
+                this.setState(position.coords);
+            }
+        );
+        Alert.alert("..", temp)
     }
 
     static navigationOptions = {
@@ -35,6 +47,12 @@ class EditScreen extends React.Component {
     }
 
     render() {
+        const temp = navigator.geolocation.getCurrentPosition(
+            (position) => {
+                this.setState(position.coords);
+                this.checkMatches();
+            }
+        );
         return (
             <View style={{flex: 1, alignItems: "stretch", justifyContent: "space-between"}}>
 
@@ -70,6 +88,7 @@ class EditScreen extends React.Component {
                         value={String(this.state.lat)}/>
                 </View>
                 <Text>{JSON.stringify(this.state)}</Text>
+                {/*<Text>{JSON.stringify(temp)}</Text>*/}
                 <View>
                     <Button
                         title="Save"
