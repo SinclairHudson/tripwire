@@ -108,7 +108,7 @@ class HomeScreen extends React.Component {
                             source={require('./TripwireThumbnail.png')}
                         />
                     </View>
-                    <Button color="#cc0e0e" style={{margin: 30, borderRadius: 20}}
+                    <Button color="#58EE2A" style={{margin: 30, borderRadius: 20}}
                         title="Waypoints"
                         onPress={() => this.props.navigation.navigate('Details')}
                     >
@@ -122,8 +122,6 @@ class HomeScreen extends React.Component {
                         </Text>
                         <Switch
                             name="ios-add-circle-outline"
-                            thumbColor="#cc0e0e"
-                            tintColor="#1c4f87"
                             size={40}
                             onValueChange={this.toggleSwitch}
                             value={this.state.global}
