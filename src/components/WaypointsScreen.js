@@ -54,7 +54,7 @@ class WaypointsScreen extends React.Component {
               name="ios-add-circle-outline"
               size={30}
               style={{ marginTop: '10%' }}
-              onPress={() => this.props.navigation.navigate('Edit')}
+              onPress={() => this.props.navigation.navigate('Edit', {id: "New Waypoint"})}
             />
           </View>
         </ScrollView>

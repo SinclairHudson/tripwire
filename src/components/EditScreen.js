@@ -7,10 +7,11 @@ class EditScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            radius: -1,
-            long: 90.0000,
-            lat: 30.00000,
-            enabled: false,
+            name: this.props.navigation.state.params.id,
+            radius: 0,
+            long: 0,
+            lat: 0,
+            enabled: true,
             onTrip: "Vibrate"
         }
     }
@@ -35,18 +36,19 @@ class EditScreen extends React.Component {
     }
 
     save() {
-        AsyncStorage.setItem(this.name,
+        AsyncStorage.removeItem(this.props.navigation.state.params.id);
+        AsyncStorage.setItem(this.state.name,
             JSON.stringify({
-                name: this.name,
-                radius: parseInt(this.radius),
+                name: this.state.name,
+                radius: parseInt(this.state.radius),
                 enabled: true,
-                long: parseInt(this.long),
-                lat: parseInt(this.lat),
+                long: parseInt(this.state.long),
+                lat: parseInt(this.state.lat),
                 onTrip: "Vibrate",
             })
         );
 
-        this.props.navigation.navigate('Waypoints')
+        this.props.navigation.goBack();
     }
 
     render() {
@@ -58,7 +60,7 @@ class EditScreen extends React.Component {
                     <TextInput
                         style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
                         onChangeText={(name) => this.setState({name})}
-                        value={this.props.navigation.state.params.id}/>
+                        value={this.state.name}/>
                 </View>
 
                 <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
