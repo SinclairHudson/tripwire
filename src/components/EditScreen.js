@@ -39,15 +39,23 @@ class EditScreen extends React.Component {
     };
 
     componentDidMount() {
-        AsyncStorage.getItem(this.props.navigation.state.params.id).then(
-            (item) => {
-                this.setState(JSON.parse(item));
-            }
-        );
+        if (this.props.navigation.state.params.id === 'Untitled') {
+            return;
+        } else {
+            AsyncStorage.getItem(this.props.navigation.state.params.id).then(
+                (item) => {
+                    this.setState(JSON.parse(item));
+                }
+            );
+        }
     }
 
-    save() {
-        AsyncStorage.removeItem(this.props.navigation.state.params.id);
+    async save() {
+        try {
+            await AsyncStorage.removeItem(this.props.navigation.state.params.id);
+        } catch(exception){
+        }
+
         AsyncStorage.setItem(this.state.name,
             JSON.stringify({
                 name: this.state.name,
@@ -59,6 +67,15 @@ class EditScreen extends React.Component {
             })
         );
 
+        this.props.navigation.goBack();
+    }
+
+    async delete() {
+        try {
+            await AsyncStorage.removeItem(this.props.navigation.state.params.id);
+        }
+        catch(exception) {
+        }
         this.props.navigation.goBack();
     }
 
@@ -104,9 +121,8 @@ class EditScreen extends React.Component {
                             onValueChange = {(itemValue, itemIndex) =>
                                 this.setState({onTrip: itemValue})}>
                             <Picker.Item label="Vibrate" value="Vibrate"/>
-                            <Picker.Item label="Push" value="Push"/>
                             <Picker.Item label="Alert" value="Alert"/>
-                            <Picker.Item label="???" value="AliA"/>
+                            <Picker.Item label="Alarm" value="Alarm"/>
                         </Picker>
                 </View>
 
@@ -117,13 +133,27 @@ class EditScreen extends React.Component {
                         title="Save"
                         onPress={() => this.save()}
                     />
+
                     <Button
                         title="Save Current Location"
                         onPress={() => this.setCurrentLocation()}
                     />
+
                     <Button color="#f91800"
                             title="Cancel"
                             onPress={() => this.props.navigation.goBack()}
+                    />
+
+                    <Button
+                        color="#f91800"
+                        title="Delete"
+                        onPress={() => this.delete()}
+                    />
+
+                    <Button
+                        color="#333333"
+                        title="Cancel"
+                        onPress={() => this.props.navigation.goBack()}
                     />
                 </View>
             </View>
