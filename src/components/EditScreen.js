@@ -46,6 +46,21 @@ class EditScreen extends React.Component {
         );
     }
 
+    save() {
+        AsyncStorage.setItem(this.name,
+            JSON.stringify({
+                name: this.name,
+                radius: parseInt(this.radius),
+                enabled: true,
+                long: parseInt(this.long),
+                lat: parseInt(this.lat),
+                onTrip: "Vibrate",
+            })
+        );
+
+        this.props.navigation.navigate('Waypoints')
+    }
+
     render() {
         const temp = navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -92,7 +107,7 @@ class EditScreen extends React.Component {
                 <View>
                     <Button
                         title="Save"
-                        onPress={() => this.props.navigation.navigate('Waypoints')}
+                        onPress={() => this.save()}
                     />
                     <Button color="#f91800"
                             title="Cancel"

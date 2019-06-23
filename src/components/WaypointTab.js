@@ -8,6 +8,7 @@ import EditScreen from './EditScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import styles from './sytles';
+import WaypointsScreen from "./WaypointsScreen";
 
 class WaypointTab extends React.Component {
     constructor(props) {
