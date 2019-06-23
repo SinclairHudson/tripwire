@@ -1,51 +1,55 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  view: {
+  switch:{
+    flex: 2,
+  },
+  editor:{
+    flex: 1,
+    alignItems: "stretch",
+    justifyContent: "center",
+    margin: 30,
+  },
+  tab: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'space-around',
+    backgroundColor: 'black',
     margin: 3,
-    padding: 5,
+    padding: 9,
     borderBottomWidth: 0.5,
-    borderBottomColor: '#d6d7da',
+    borderBottomColor: '#fbfcff',
+    color: 'white',
+    alignSelf: 'stretch',
 
     borderRadius: 3
   },
-  icon: {
-    margin: 6,
+  backdrop: {
+    backgroundColor: 'black',
     flex: 1,
-    color: 'rgba(255,214,48,1)'
+    color: 'white',
+  },
+
+  icon: {
+    padding: 9,
+    flex: 1,
+    color: 'rgb(255,249,251)',
+  },
+  add: {
+    padding: 40,
+    flex: 1,
+    color: 'rgb(255,249,251)',
+    alignSelf: 'center'
   },
   buttonText: {
-    flex: 3,
+    flex: 4,
     fontSize: 25,
-    color: 'rgba(255,255,255,1)'
+    color: 'rgb(255,255,255)'
   },
   buttons: {
     flex: 1,
-    justifyContent: 'space-around'
-  },
-  stop: {
-    paddingTop: 115,
-    margin: 30,
-    flex: 1,
-    width: 300,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgb(255,26,31)',
-    borderRadius: 20
-  },
-  start: {
-    paddingTop: 115,
-    margin: 30,
-    flex: 1,
-    width: 300,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgb(75,226,27)',
-    borderRadius: 20
+    justifyContent: 'space-around',
+    alignContent: 'center'
   },
   chartLabel: {
     color: 'rgba(255,255,255,0.97)',
@@ -69,10 +73,10 @@ const styles = StyleSheet.create({
     margin: 30,
     flex: 1,
     width: 300,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    alignContent: 'center',
+    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(55,96,163,1)',
+    backgroundColor: 'rgb(255,13,3)',
     borderRadius: 20
   },
   text: {

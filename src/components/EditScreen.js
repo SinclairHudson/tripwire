@@ -2,6 +2,7 @@ import React from "react";
 import {View, Text, Button, ScrollView, AsyncStorage, TextInput, Picker} from "react-native";
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
+import styles from './sytles';
 
 class EditScreen extends React.Component {
     constructor(props) {
@@ -53,7 +54,7 @@ class EditScreen extends React.Component {
     async save() {
         try {
             await AsyncStorage.removeItem(this.props.navigation.state.params.id);
-        } catch(exception){
+        } catch (exception) {
         }
 
         AsyncStorage.setItem(this.state.name,
@@ -73,8 +74,7 @@ class EditScreen extends React.Component {
     async delete() {
         try {
             await AsyncStorage.removeItem(this.props.navigation.state.params.id);
-        }
-        catch(exception) {
+        } catch (exception) {
         }
         this.props.navigation.goBack();
     }
@@ -82,43 +82,43 @@ class EditScreen extends React.Component {
     render() {
         return (
             <View style={{flex: 1, alignItems: "stretch", justifyContent: "space-between"}}>
+                <ScrollView>
+                    <View style={styles.editor}>
+                        <Text style={{textAlign: "center"}}> Waypoint Name </Text>
+                        <TextInput
+                            style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
+                            onChangeText={(name) => this.setState({name})}
+                            value={this.state.name}/>
+                    </View>
 
-                <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
-                    <Text style={{textAlign: "center"}}> Waypoint Name </Text>
-                    <TextInput
-                        style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                        onChangeText={(name) => this.setState({name})}
-                        value={this.state.name}/>
-                </View>
+                    <View style={styles.editor}>
+                        <Text style={{textAlign: "center"}}> Waypoint Radius </Text>
+                        <TextInput
+                            style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
+                            onChangeText={(radius) => this.setState({radius})}
+                            value={String(this.state.radius)}/>
+                    </View>
 
-                <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
-                    <Text style={{textAlign: "center"}}> Waypoint Radius </Text>
-                    <TextInput
-                        style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                        onChangeText={(radius) => this.setState({radius})}
-                        value={String(this.state.radius)}/>
-                </View>
+                    <View style={styles.editor}>
+                        <Text style={{textAlign: "center"}}> Waypoint Longitude </Text>
+                        <TextInput
+                            style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
+                            onChangeText={(long) => this.setState({long})}
+                            value={String(this.state.long)}/>
+                    </View>
 
-                <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
-                    <Text style={{textAlign: "center"}}> Waypoint Longitude </Text>
-                    <TextInput
-                        style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                        onChangeText={(long) => this.setState({long})}
-                        value={String(this.state.long)}/>
-                </View>
+                    <View style={styles.editor}>
+                        <Text style={{textAlign: "center"}}> Waypoint Latitude </Text>
+                        <TextInput
+                            style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
+                            onChangeText={(lat) => this.setState({lat})}
+                            value={String(this.state.lat)}/>
+                    </View>
 
-                <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
-                    <Text style={{textAlign: "center"}}> Waypoint Latitude </Text>
-                    <TextInput
-                        style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                        onChangeText={(lat) => this.setState({lat})}
-                        value={String(this.state.lat)}/>
-                </View>
-
-                <View style={{flex: 1, alignItems: "stretch", justifyContent: "center"}}>
+                    <View style={styles.editor}>
                         <Picker
-                            selectedValue = {this.state.onTrip}
-                            onValueChange = {(itemValue, itemIndex) =>
+                            selectedValue={this.state.onTrip}
+                            onValueChange={(itemValue, itemIndex) =>
                                 this.setState({onTrip: itemValue})}>
                             <Picker.Item label="Vibrate" value="Vibrate"/>
                             <Picker.Item label="Alert" value="Alert"/>
@@ -156,6 +156,7 @@ class EditScreen extends React.Component {
                         onPress={() => this.props.navigation.goBack()}
                     />
                 </View>
+                </ScrollView>
             </View>
         );
     }

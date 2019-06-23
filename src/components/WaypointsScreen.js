@@ -3,6 +3,7 @@ import { View, ScrollView, AsyncStorage, Text } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { Card, ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
+import styles from './sytles';
 
 import WaypointTab from './WaypointTab';
 
@@ -39,26 +40,16 @@ class WaypointsScreen extends React.Component {
 
   render() {
     return (
-      <View>
-        <ScrollView>
+      <View style={styles.backdrop}>
+        <ScrollView style={styles.scroller}>
           {this.renderWaypointTabs()}
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
             <Icon
               name="ios-add-circle-outline"
-              size={30}
-              style={{ marginTop: '10%' }}
+              size={60}
+              style={styles.add}
               onPress={() => this.props.navigation.navigate('Edit', {id: "New Waypoint"})}
             />
-          </View>
         </ScrollView>
-        <Text>{JSON.stringify(this.state)}</Text>
       </View>
     );
   }
