@@ -1,27 +1,29 @@
 import React from "react";
-import {View, Text, Button, ScrollView, AsyncStorage, TextInput, Picker} from "react-native";
+import {View, Text, Button, ScrollView, AsyncStorage, TextInput, Picker, Switch} from "react-native";
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
 import styles from './styles';
+import UUIDGenerator from 'react-native-uuid-generator';
 
 class EditScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            radius: 0,
-            long: 0.01,
-            lat: 0.01,
+            name: "Default",
+            radius: '5',
+            long: '0.01',
+            lat: '0.01',
             enabled: true,
             onTrip: "Vibrate"
         }
     }
 
-    setCurrentLocation(){
+    setCurrentLocation() {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 this.setState({
-                    long: position.coords.longitude,
-                    lat: position.coords.latitude
+                    long: String(position.coords.longitude),
+                    lat: String(position.coords.latitude)
                 });
             }
         );
@@ -39,35 +41,35 @@ class EditScreen extends React.Component {
     };
 
     componentDidMount() {
-        if (this.props.navigation.state.params.id === 'Untitled') {
-            return;
-        } else {
             AsyncStorage.getItem(this.props.navigation.state.params.id).then(
                 (item) => {
-                    this.setState(JSON.parse(item));
+                    let temp = JSON.parse(item);
+                    let s = {
+                        name: temp.name,
+                        radius: String(temp.radius),
+                        long: String(temp.long),
+                        lat: String(temp.lat),
+                        enabled: temp.enabled,
+                        onTrip: temp.onTrip,
+
+                    };
+                    this.setState(s);
                 }
             );
-        }
     }
 
     async save() {
-        try {
-            await AsyncStorage.removeItem(this.props.navigation.state.params.id);
-        } catch (exception) {
-        }
-
         AsyncStorage.setItem(this.props.navigation.state.params.id,
             JSON.stringify({
                 name: this.state.name,
-                radius: this.state.radius,
-                enabled: true,
-                long: this.state.long,
-                lat: this.state.lat,
+                radius: Number(this.state.radius),
+                enabled: this.state.enabled,
+                long: Number(this.state.long),
+                lat: Number(this.state.lat),
                 onTrip: this.state.onTrip,
             })
         );
-
-        this.props.navigation.goBack();
+        this.props.navigation.pop(2);
     }
 
     async delete() {
@@ -75,7 +77,7 @@ class EditScreen extends React.Component {
             await AsyncStorage.removeItem(this.props.navigation.state.params.id);
         } catch (exception) {
         }
-        this.props.navigation.goBack();
+        this.props.navigation.replace('Waypoints');
     }
 
     render() {
@@ -85,34 +87,38 @@ class EditScreen extends React.Component {
                     <View style={styles.editor}>
                         <Text style={{textAlign: "center"}}> Waypoint Name </Text>
                         <TextInput
+                            onChangeText={name => this.setState({name: name})}
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                            onChangeText={(name) => this.rebase(name)}
-                            value={this.props.navigation.state.params.id}/>
+                            value={this.state.name}/>
                     </View>
 
                     <View style={styles.editor}>
                         <Text style={{textAlign: "center"}}> Waypoint Radius</Text>
                         <TextInput
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                            onChangeText={(radius) => this.setState({radius: parseInt(radius)})}
-                            value={String(this.state.radius)}/>
+                            onChangeText={rad => this.setState({radius: rad})}
+                            value={this.state.radius}/>
                     </View>
 
                     <View style={styles.editor}>
                         <Text style={{textAlign: "center"}}> Waypoint Longitude </Text>
                         <TextInput
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                            onChangeText={(long) => this.setState({long: parseFloat(long)})}
-                            value={String(this.state.long)}/>
+                            onChangeText={long => this.setState({long: long})}
+                            value={this.state.long}/>
                     </View>
 
                     <View style={styles.editor}>
                         <Text style={{textAlign: "center"}}> Waypoint Latitude </Text>
                         <TextInput
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                            onChangeText={(lat) => this.setState({lat: parseFloat(lat)})}
-                            value={String(this.state.lat)}/>
+                            onChangeText={lat => this.setState({lat: lat})}
+                            value={this.state.lat}/>
                     </View>
+                    <Button
+                        title="Save Current Location"
+                        onPress={() => this.setCurrentLocation()}
+                    />
 
                     <View style={styles.editor}>
                         <Picker
@@ -123,33 +129,36 @@ class EditScreen extends React.Component {
                             <Picker.Item label="Alert" value="Alert"/>
                             <Picker.Item label="Alarm" value="Alarm"/>
                         </Picker>
-                </View>
+                    </View>
 
-                <Text>{JSON.stringify(this.state)}</Text>
-
-                <View>
-                    <Button
-                        title="Save"
-                        onPress={() => this.save()}
+                    <Switch
+                        name="ios-add-circle-outline"
+                        size={30}
+                        style={styles.switch}
+                        onValueChange={()=>{
+                            this.setState({enabled: !this.state.enabled});
+                        }}
+                        value={this.state.enabled}
                     />
 
-                    <Button
-                        title="Save Current Location"
-                        onPress={() => this.setCurrentLocation()}
-                    />
+                    <View>
+                        <Button
+                            title="Save"
+                            onPress={() => this.save()}
+                        />
 
-                    <Button
-                        color="#f91800"
-                        title="Delete"
-                        onPress={() => this.delete()}
-                    />
+                        <Button
+                            color="#f91800"
+                            title="Delete"
+                            onPress={() => this.delete()}
+                        />
 
-                    <Button
-                        color="#333333"
-                        title="Cancel"
-                        onPress={() => this.props.navigation.goBack()}
-                    />
-                </View>
+                        <Button
+                            color="#333333"
+                            title="Cancel"
+                            onPress={() => this.props.navigation.replace('Waypoints')}
+                        />
+                    </View>
                 </ScrollView>
             </View>
         );

@@ -8,14 +8,12 @@ import EditScreen from './EditScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import styles from './styles';
-import WaypointsScreen from "./WaypointsScreen";
+import UUIDGenerator from 'react-native-uuid-generator';
 
 class WaypointTab extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            enabled: false
-        };
+        this.state={};
     }
 
     async componentDidMount() {
@@ -30,30 +28,14 @@ class WaypointTab extends React.Component {
         }
     }
 
-    componentWillUnmount() {
-        AsyncStorage.setItem(this.props.id, JSON.stringify(this.state));
-    }
-
-    toggleSwitch = value => {
-        this.setState({enabled: value});
-    };
-
     render() {
-        const {id} = this.props;
         return (
-            <View style={styles.tab}>
+            <View style={[styles.tab, this.state.enabled? {backgroundColor: 'green'}: {backgroundColor: 'black'}]}>
                 <Text style={styles.buttonText}
                       onPress={() => this.props.navigation.push('Edit', {
                           id: this.props.id
                       })}>
-                    {id}</Text>
-                <Switch
-                    name="ios-add-circle-outline"
-                    size={30}
-                    style={styles.switch}
-                    onValueChange={this.toggleSwitch}
-                    value={this.state.enabled}
-                />
+                    {this.state.name}</Text>
             </View>
         );
 

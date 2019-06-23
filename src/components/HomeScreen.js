@@ -83,10 +83,10 @@ class HomeScreen extends React.Component {
                                     }
                                     break;
                                 case "Alert":
-                                    Alert.alert("ALERT!", "you're close to " + key + ".");
+                                    Alert.alert("ALERT!", "you're close to " + val.name + ".");
                                     break;
                                 default:
-                                    Alert.alert("ALERT!", "you're close to " + key + ".");
+                                    Alert.alert("ALERT!", "you're close to " + val.name + ".");
                             }
                         }
                     }
@@ -110,7 +110,7 @@ class HomeScreen extends React.Component {
                     </View>
                     <Button color="#58EE2A" style={{margin: 30, borderRadius: 20}}
                         title="Waypoints"
-                        onPress={() => this.props.navigation.navigate('Details')}
+                        onPress={() => this.props.navigation.navigate('Waypoints')}
                     >
                         <Text style={{alignText:'center', fontSize:25}}>Waypoints</Text>
                     </Button>
