@@ -138,11 +138,6 @@ class EditScreen extends React.Component {
                         onPress={() => this.setCurrentLocation()}
                     />
 
-                    <Button color="#f91800"
-                            title="Cancel"
-                            onPress={() => this.props.navigation.goBack()}
-                    />
-
                     <Button
                         color="#f91800"
                         title="Delete"
