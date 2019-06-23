@@ -8,10 +8,9 @@ class EditScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: this.props.navigation.state.params.id,
             radius: 0,
-            long: 0,
-            lat: 0,
+            long: 0.01,
+            lat: 0.01,
             enabled: true,
             onTrip: "Vibrate"
         }
@@ -57,7 +56,7 @@ class EditScreen extends React.Component {
         } catch (exception) {
         }
 
-        AsyncStorage.setItem(this.state.name,
+        AsyncStorage.setItem(this.props.navigation.state.params.id,
             JSON.stringify({
                 name: this.state.name,
                 radius: this.state.radius,
@@ -87,15 +86,15 @@ class EditScreen extends React.Component {
                         <Text style={{textAlign: "center"}}> Waypoint Name </Text>
                         <TextInput
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                            onChangeText={(name) => this.setState({name: name})}
-                            value={this.state.name}/>
+                            onChangeText={(name) => this.rebase(name)}
+                            value={this.props.navigation.state.params.id}/>
                     </View>
 
                     <View style={styles.editor}>
-                        <Text style={{textAlign: "center"}}> Waypoint Radius </Text>
+                        <Text style={{textAlign: "center"}}> Waypoint Radius</Text>
                         <TextInput
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, textAlign: "center"}}
-                            onChangeText={(radius) => this.setState({radius: parseFloat(radius)})}
+                            onChangeText={(radius) => this.setState({radius: parseInt(radius)})}
                             value={String(this.state.radius)}/>
                     </View>
 
