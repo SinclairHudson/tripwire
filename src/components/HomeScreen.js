@@ -83,10 +83,10 @@ class HomeScreen extends React.Component {
                                     }
                                     break;
                                 case "Alert":
-                                    Alert.alert("ALERT!", "you're close to " + key + ".");
+                                    Alert.alert("ALERT!", "you're close to " + val.name + ".");
                                     break;
                                 default:
-                                    Alert.alert("ALERT!", "you're close to " + key + ".");
+                                    Alert.alert("ALERT!", "you're close to " + val.name + ".");
                             }
                         }
                     }
@@ -110,7 +110,7 @@ class HomeScreen extends React.Component {
                     </View>
                     <Button color="#cc0e0e" style={{margin: 30, borderRadius: 20}}
                         title="Waypoints"
-                        onPress={() => this.props.navigation.navigate('Details')}
+                        onPress={() => this.props.navigation.navigate('Waypoints')}
                     >
                         <Text style={{alignText:'center', fontSize:25}}>Waypoints</Text>
                     </Button>
@@ -123,7 +123,7 @@ class HomeScreen extends React.Component {
                         <Switch
                             name="ios-add-circle-outline"
                             thumbColor="#cc0e0e"
-                            tintColor="#1c4f87"
+                            trackColor="#1c4f87"
                             size={40}
                             onValueChange={this.toggleSwitch}
                             value={this.state.global}

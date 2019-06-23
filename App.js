@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { View, Text, Button, ScrollView, AppRegistry } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 
 import SettingsScreen from './src/components/SettingsScreen';
 import HomeScreen from './src/components/HomeScreen';
@@ -21,8 +21,6 @@ import DataScreen from './src/components/DataScreen';
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    Details: WaypointsScreen,
-    Settings: SettingsScreen,
     Edit: EditScreen,
     Waypoints: WaypointsScreen,
     Data: DataScreen
