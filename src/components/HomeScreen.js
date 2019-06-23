@@ -1,9 +1,10 @@
 import React from "react";
-import {View, Text, Button, ScrollView, AsyncStorage, Switch, PermissionsAndroid, Vibration, Alert} from "react-native";
+import {View, Text, Button, ScrollView, AsyncStorage, Switch, PermissionsAndroid, Vibration, Alert, TouchableOpacity} from "react-native";
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
 import {getDistance} from 'geolib';
 import SoundPlayer from 'react-native-sound-player'
+import styles from './sytles';
 
 class HomeScreen extends React.Component {
     constructor(props) {
@@ -24,7 +25,7 @@ class HomeScreen extends React.Component {
                     'title': 'Example App',
                     'message': 'Example App access to your location '
                 }
-            )
+            );
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
                 console.log("You can use the location")
             } else {
@@ -62,8 +63,6 @@ class HomeScreen extends React.Component {
     }
 
     checkMatches() {
-        Vibration.vibrate([1, 100], false);
-        this.forceUpdate();
         AsyncStorage.getAllKeys((err, keys) => {
             AsyncStorage.multiGet(keys, (err, stores) => {
                 stores.map((result, i, store) => {
@@ -109,25 +108,27 @@ class HomeScreen extends React.Component {
 
     render() {
         return (
-            <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
-                <Text>Tripwire</Text>
-                <Button
-                    title="Waypoints"
-                    onPress={() => this.props.navigation.navigate('Details')}
-                />
-                <Button
-                    title="Go to data"
-                    onPress={() => this.props.navigation.navigate('Data')}
-                />
-                <Text>
-                    Toggle all alerts:
-                </Text>
-                <Switch
-                    name="ios-add-circle-outline"
-                    size={70}
-                    onValueChange={this.toggleSwitch}
-                    value={this.state.global}
-                />
+            <View style={styles.backdrop}>
+                <View style={styles.buttons}>
+                    <Text style={styles.buttonText}>Tripwire</Text>
+                    <TouchableOpacity style={styles.button}
+                        title="Waypoints"
+                        onPress={() => this.props.navigation.navigate('Details')}
+                    >
+                        <Text style={styles.buttonText}>Waypoints</Text>
+                    </TouchableOpacity>
+                    <View>
+                        <Text style={styles.buttonText}>
+                            Toggle all alerts:
+                        </Text>
+                        <Switch
+                            name="ios-add-circle-outline"
+                            size={70}
+                            onValueChange={this.toggleSwitch}
+                            value={this.state.global}
+                        />
+                    </View>
+                </View>
             </View>
         );
     }
