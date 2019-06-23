@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   buttons: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignContent: 'center'
   },
   chartLabel: {

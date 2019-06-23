@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, Button, ScrollView, AsyncStorage, Switch, PermissionsAndroid, Vibration, Alert, TouchableOpacity} from "react-native";
+import {View, Text, Button, ScrollView, AsyncStorage, Switch, PermissionsAndroid, Vibration, Alert, TouchableOpacity, Image} from "react-native";
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
 import {getDistance} from 'geolib';
@@ -37,14 +37,7 @@ class HomeScreen extends React.Component {
     }
 
     static navigationOptions = {
-        title: 'Home',
-        headerStyle: {
-            backgroundColor: '#000000',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-            fontWeight: 'bold',
-        },
+        header: null
     };
 
     componentDidMount() {
@@ -109,21 +102,29 @@ class HomeScreen extends React.Component {
     render() {
         return (
             <View style={styles.backdrop}>
-                <View style={styles.buttons}>
-                    <Text style={styles.buttonText}>Tripwire</Text>
-                    <TouchableOpacity style={styles.button}
+                <View style={{flex:1, alignItems: "stretch", justifyContent: "space-between"}}>
+                    <View style={{justifyContent: 'center', alignItems: 'center', marginTop:"25%"}}>
+                        <Image
+                            source={require('./TripwireThumbnail.png')}
+                        />
+                    </View>
+                    <Button color="#cc0e0e" style={{margin: 30, borderRadius: 20}}
                         title="Waypoints"
                         onPress={() => this.props.navigation.navigate('Details')}
                     >
-                        <Text style={styles.buttonText}>Waypoints</Text>
-                    </TouchableOpacity>
+                        <Text style={{alignText:'center', fontSize:25}}>Waypoints</Text>
+                    </Button>
                     <View style={styles.global}>
-                        <Text style={styles.buttonText}>
-                            Toggle all alerts:
+                        <Text style={{flex: 4,
+                            fontSize: 15,
+                            color: 'rgb(255,255,255)'}}>
+                            Toggle off alerts:
                         </Text>
                         <Switch
                             name="ios-add-circle-outline"
-                            size={70}
+                            thumbColor="#cc0e0e"
+                            tintColor="#1c4f87"
+                            size={40}
                             onValueChange={this.toggleSwitch}
                             value={this.state.global}
                         />
