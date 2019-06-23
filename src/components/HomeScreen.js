@@ -2,19 +2,21 @@ import React from "react";
 import {View, Text, Button, ScrollView, AsyncStorage, Switch, PermissionsAndroid, Vibration, Alert} from "react-native";
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import SettingsScreen from "./SettingsScreen";
-import { getDistance } from 'geolib';
+import {getDistance} from 'geolib';
 import SoundPlayer from 'react-native-sound-player'
 
 class HomeScreen extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.requestLocationPermission();
         this.state = {
             longitude: 0,
             latitude: 0,
+            global: true
         };
     }
-    async  requestLocationPermission(){
+
+    async requestLocationPermission() {
         try {
             const granted = await PermissionsAndroid.request(
                 PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -32,6 +34,7 @@ class HomeScreen extends React.Component {
             console.warn(err)
         }
     }
+
     static navigationOptions = {
         title: 'Home',
         headerStyle: {
@@ -42,6 +45,7 @@ class HomeScreen extends React.Component {
             fontWeight: 'bold',
         },
     };
+
     componentDidMount() {
         this.watchId = navigator.geolocation.watchPosition(
             (position) => {
@@ -52,10 +56,12 @@ class HomeScreen extends React.Component {
             {enableHighAccuracy: false, timeout: 200, maximumAge: 10, distanceFilter: 1},
         );
     }
+
     componentWillUnmount() {
         navigator.geolocation.clearWatch(this.watchId);
     }
-    checkMatches(){
+
+    checkMatches() {
         Vibration.vibrate([1, 100], false);
         this.forceUpdate();
         AsyncStorage.getAllKeys((err, keys) => {
@@ -68,36 +74,43 @@ class HomeScreen extends React.Component {
                         longitude: val.long,
                         latitude: val.lat,
                     });
-                    if(distance < val.radius && val.enabled){
-                        switch(val.onTrip) {
-                            case "Vibrate":
-                                Vibration.vibrate([1, 5000, 1000, 5000, 1000, 5000], false);
-                                break;
-                            case "Push":
-                                // code block
-                                break;
-                            case "AliA":
-                                try {
-                                    SoundPlayer.playSoundFile('a', 'mp3')
-                                } catch (e) {
-                                    console.log(`cannot play the sound file`, e)
-                                }
-                                break;
-                            case "Alert":
-                                Alert.alert("ALERT!", "you're close to "+ key + ".");
-                                break;
-                            default:
-                                Alert.alert("ALERT!", "you're close to "+ key + ".");
+                    if (this.state.global) {
+                        if (distance < val.radius && val.enabled) {
+                            switch (val.onTrip) {
+                                case "Vibrate":
+                                    Vibration.vibrate([1, 5000, 1000, 5000, 1000, 5000], false);
+                                    break;
+                                case "Push":
+                                    // code block
+                                    break;
+                                case "Alarm":
+                                    try {
+                                        SoundPlayer.playSoundFile('a', 'mp3')
+                                    } catch (e) {
+                                        console.log(`cannot play the sound file`, e)
+                                    }
+                                    break;
+                                case "Alert":
+                                    Alert.alert("ALERT!", "you're close to " + key + ".");
+                                    break;
+                                default:
+                                    Alert.alert("ALERT!", "you're close to " + key + ".");
+                            }
                         }
                     }
                 });
             });
         });
     }
+
+    toggleSwitch = value => {
+        this.setState({global: value});
+    };
+
     render() {
         return (
             <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
-                <Text>Home Screen</Text>
+                <Text>Tripwire</Text>
                 <Button
                     title="Waypoints"
                     onPress={() => this.props.navigation.navigate('Details')}
@@ -109,10 +122,12 @@ class HomeScreen extends React.Component {
                 <Text>
                     Toggle all alerts:
                 </Text>
-                <Switch/>
-                <Text>
-                    {JSON.stringify(this.props)}
-                </Text>
+                <Switch
+                    name="ios-add-circle-outline"
+                    size={70}
+                    onValueChange={this.toggleSwitch}
+                    value={this.state.global}
+                />
             </View>
         );
     }

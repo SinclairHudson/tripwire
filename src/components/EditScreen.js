@@ -28,11 +28,15 @@ class EditScreen extends React.Component {
     };
 
     componentDidMount() {
-        AsyncStorage.getItem(this.props.navigation.state.params.id).then(
-            (item) => {
-                this.setState(JSON.parse(item));
-            }
-        );
+        if (this.props.navigation.state.params.id === 'Untitled') {
+            return;
+        } else {
+            AsyncStorage.getItem(this.props.navigation.state.params.id).then(
+                (item) => {
+                    this.setState(JSON.parse(item));
+                }
+            );
+        }
     }
 
     async save() {
